@@ -1,0 +1,3254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #F5E6E3;
+    --color-bg-alt: #EAD3CF;
+    --color-ink: #741d16;
+    --color-ink-muted: #7A6B57;
+    --color-line: #741d16;
+    --accent-home: var(--color-ink);
+    --accent-sympathy: #7C8A72;
+    --accent-buchon: #9B2C55;
+    --accent-balloons: #3E5A8C;
+    --accent-yellowday: #B9861E;
+    --accent-prom: #7A5C99;
+    --accent-vase: #B3714F;
+    --accent-halloween: #C06B1F;
+    --accent-active: var(--accent-home);
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Work Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #56140f;
+      --color-bg-alt: #6f130c;
+      --color-ink: #F1E7D6;
+      --color-ink-muted: #B9AA92;
+      --color-line: rgba(241,231,214,0.16);
+      --accent-sympathy: #9BAA8F;
+      --accent-buchon: #D95C86;
+      --accent-balloons: #85A3DB;
+      --accent-yellowday: #E0AC3F;
+      --accent-prom: #B79BD1;
+      --accent-vase: #D99B78;
+      --accent-halloween: #E8954D;
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-bg: #211417;
+    --color-bg-alt: #2B1A1E;
+    --color-ink: #F1E7D6;
+    --color-ink-muted: #B9AA92;
+    --color-line: rgba(241,231,214,0.16);
+    --accent-sympathy: #9BAA8F;
+    --accent-buchon: #D95C86;
+    --accent-balloons: #85A3DB;
+    --accent-yellowday: #E0AC3F;
+    --accent-prom: #B79BD1;
+    --accent-vase: #D99B78;
+    --accent-halloween: #E8954D;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Nav */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    z-index: 10;
+  }
+  .nav {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(1rem, 3vw, 2.25rem);
+    padding: 1.85rem 1rem 1rem;
+    border-bottom: 1px solid var(--color-line);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .nav-link {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--color-ink-muted);
+    padding: 0 0 1rem;
+    transition: color .25s ease;
+  }
+  .nav-link[aria-selected="true"] {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+  .nav-link:hover { color: var(--color-ink); }
+  .nav-indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent-active);
+    transform: translateX(0);
+    transition: transform .4s cubic-bezier(.65,0,.35,1), width .4s cubic-bezier(.65,0,.35,1), background-color .3s ease;
+  }
+
+  /* Mobile nav toggle (hidden on desktop) */
+  .nav-mobile-bar { display: none; }
+  .nav-toggle {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0;
+  }
+  .nav-toggle-icon { display: flex; flex-direction: column; gap: 4px; width: 20px; flex-shrink: 0; }
+  .nav-toggle-icon span {
+    display: block;
+    height: 2px;
+    background: var(--color-ink);
+    border-radius: 1px;
+    transform-origin: center;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .nav-toggle.active .nav-toggle-icon span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle.active .nav-toggle-icon span:nth-child(2) { opacity: 0; }
+  .nav-toggle.active .nav-toggle-icon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; }
+
+  .panel-hero {
+    text-align: center;
+    padding: 3.25rem 1rem 2rem;
+  }
+  .panel-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 6vw, 3.1rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem;
+  }
+  .panel-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-ink-muted);
+    max-width: 34ch;
+    margin: 0 auto;
+  }
+
+  /* How to order page */
+  .info-content {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 1rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .info-block h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    margin: 0 0 0.5rem;
+  }
+  .info-block p {
+    margin: 0;
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .info-block ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .info-block li {
+    color: var(--color-ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Category filters */
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+    padding: 0 0.5rem;
+  }
+  .filter-chip {
+    appearance: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-ink-muted);
+    background: transparent;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .filter-chip:hover { border-color: var(--accent-active); color: var(--color-ink); }
+  .filter-chip[aria-pressed="true"] {
+    background: var(--accent-active);
+    border-color: var(--accent-active);
+    color: var(--color-bg);
+  }
+  .filter-empty {
+    text-align: center;
+    color: var(--color-ink-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .catalog-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0 0 4.5rem;
+    max-width: 680px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2.5rem 1.75rem;
+  }
+  .panel[data-category="balloons"] .catalog-list,
+  .panel[data-category="new"] .catalog-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .catalog-item { display: flex; flex-direction: column; }
+  .item-photo {
+    aspect-ratio: 1 / 1;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink-muted);
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+  }
+  .item-photo svg { width: 30px; height: 30px; opacity: 0.55; }
+  .item-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .panel[data-category="new"] .item-photo img { object-fit: contain; }
+  .item-info { display: flex; flex-direction: column; gap: 0.4rem; }
+  .item-title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; }
+  .item-name {
+    flex: 1 1 auto;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--color-ink);
+  }
+  .item-title-price {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .item-sizes { display: flex; flex-direction: column; gap: 0.2rem; }
+  .size-row { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.92rem; }
+  .size-row .size-label { color: var(--color-ink-muted); }
+  .size-row .size-price { color: var(--color-ink); font-variant-numeric: tabular-nums; }
+
+  .panel-enter { animation: panelIn .5s ease both; }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panel-enter { animation: none; }
+    .nav-indicator { transition: none; }
+  }
+
+  .site-footer {
+    text-align: center;
+    padding: 2.75rem 1rem 4rem;
+    font-size: 0.85rem;
+    color: var(--color-ink-muted);
+    border-top: 1px solid var(--color-line);
+  }
+  .site-footer a { color: var(--color-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Image lightbox */
+  .item-photo:has(img) { cursor: zoom-in; }
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 12, 8, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease;
+  }
+  .lightbox.open { opacity: 1; visibility: visible; }
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: #F5E6E3;
+    font-size: 2.25rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  /* Mobile: hamburger-driven nav menu, swipeable filter pills, 2-column grid everywhere */
+  @media (max-width: 640px) {
+    .nav-mobile-bar {
+      display: flex;
+      align-items: center;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .panel-hero { padding-top: 1.25rem; }
+
+    .nav {
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      gap: 0;
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .nav.open { display: flex; }
+    .nav-indicator { display: none; }
+    .nav-link {
+      width: 100%;
+      text-align: left;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .nav-link[aria-selected="true"] { background: var(--color-bg-alt); }
+
+    .filter-row {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 0 -1.25rem 2rem;
+      padding: 0 1.25rem;
+      mask-image: linear-gradient(to right, transparent 0, black 1.25rem, black calc(100% - 1.25rem), transparent 100%);
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .filter-chip { flex-shrink: 0; }
+
+    .catalog-list,
+    .panel[data-category="balloons"] .catalog-list,
+    .panel[data-category="new"] .catalog-list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <div class="nav-mobile-bar">
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav">
+      <span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span id="nav-current-label">Home</span>
+    </button>
+  </div>
+  <nav class="nav" id="main-nav" role="tablist" aria-label="Catalog categories">
+    <div class="nav-indicator" aria-hidden="true"></div>
+    <button class="nav-link" role="tab" aria-selected="true" data-category="home" id="tab-home">Home</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="halloween" id="tab-halloween">Halloween</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="sympathy" id="tab-sympathy">Sympathy</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="buchon" id="tab-buchon">Buchón</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="vase" id="tab-vase">Vase</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="balloons" id="tab-balloons">Balloons</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="new" id="tab-new">Cards</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom">More</button>
+
+    <!--
+    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom">Prom</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="yellowday" id="tab-yellowday">Yellow Day</button>
+    -->
+  
+  </nav>
+</div>
+
+<main>
+
+  <!-- HOME / HOW TO ORDER -->
+  <section class="panel" role="tabpanel" data-category="home" aria-labelledby="tab-home">
+    <div class="panel-hero">
+      <h1>How to Order</h1>
+      <p class="panel-desc">Welcome, to our catalog, hope you find what you're looking for. A few things to know before you reach out.</p>
+    </div>
+    <div class="info-content">
+      <div class="info-block">
+        <h2>Time to Order</h2>
+        <p>Please order at least 3 days in advance. Significantly larger arrangements may need 4 - 5 days. We do take same-day requests, it just depends on floral availability that we have at the time.</p>
+      </div>
+      <div class="info-block">
+        <h2>The process</h2>
+        <ol>
+          <li>Browse and reach out with the name and date you need it for.</li>
+          <li>We'll confirm the details with you and provide a final price.</li>
+          <li>Payment is processed and the order is confirmed.</li>
+        </ol>
+      </div>
+      <div class="info-block">
+        <h2>Payment &amp; Deposit</h2>
+        <p>We accept payment over the phone or via Zelle. You're also welcome to stop by in person before the order is due. A non-refundable 25% deposit of the arrangement's price is required to confirm your order.</p>
+      </div>
+      <div class="info-block">
+        <h2>Delivery</h2>
+        <p>Delivery is $15 within Richmond and San Pablo. For neighboring cities, please check with us on availability and pricing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALLOWEEN -->
+  <section class="panel" role="tabpanel" data-category="halloween" aria-labelledby="tab-halloween" hidden>
+    <div class="panel-hero">
+      <h1>Halloween</h1>
+      <p class="panel-desc">Spooky season arrangements and gifts.</p>
+    </div>
+    <ul class="catalog-list">
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- SYMPATHY -->
+  <section class="panel" role="tabpanel" data-category="sympathy" aria-labelledby="tab-sympathy" hidden>
+    <div class="panel-hero">
+      <h1>Sympathy</h1>
+      <p class="panel-desc">Quiet arrangements for difficult days.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter sympathy pieces by style">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="wreath" aria-pressed="false">Wreaths</button>
+      <button class="filter-chip" data-filter="spray" aria-pressed="false">Sprays</button>
+      <button class="filter-chip" data-filter="casket" aria-pressed="false">Casket</button>
+      <button class="filter-chip" data-filter="cross" aria-pressed="false">Cross</button>
+      <button class="filter-chip" data-filter="heart" aria-pressed="false">Heart</button>
+      <button class="filter-chip" data-filter="abanico" aria-pressed="false">Abanico</button>
+      <button class="filter-chip" data-filter="vase" aria-pressed="false">Vase</button>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Classic Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">18" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">24″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath5.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath6.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">18" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">24″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath7.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">18" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">24″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath8.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">18" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">14″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath9.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath10.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">24" Full Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">12″</span><span class="size-price">$##</span></span>
+            <span class="size-row"><span class="size-label">18″</span><span class="size-price">$##</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wreath">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/wreath11.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Wreath</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="casket">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/casket1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Casket</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="heart">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/heart1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Heart</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="heart">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/heart2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Heart</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="cross">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/cross1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Cross</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">Small</span><span class="size-price">$55</span></span>
+            <span class="size-row"><span class="size-label">Large</span><span class="size-price">$85</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="cross">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/cross2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Cross</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">Small</span><span class="size-price">$55</span></span>
+            <span class="size-row"><span class="size-label">Large</span><span class="size-price">$85</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="cross">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/cross3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Cross</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">Small</span><span class="size-price">$55</span></span>
+            <span class="size-row"><span class="size-label">Large</span><span class="size-price">$85</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="cross">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/cross4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Cross</span>
+            <span class="item-title-price">$##</span>
+          </div>
+          <span class="item-sizes">
+            <span class="size-row"><span class="size-label">Small</span><span class="size-price">$55</span></span>
+            <span class="size-row"><span class="size-label">Large</span><span class="size-price">$85</span></span>
+          </span>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="spray">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/spray1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Spray</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="spray">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/spray2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Spray</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="spray">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/spray3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Spray</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="spray">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/spray4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">X" Spray</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="abanico">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/abanico1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Abanico</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="abanico">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/abanico2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Abanico</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="vase">
+        <div class="item-photo" aria-hidden="true"><img src="sympathy/vase1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Blue Mist</span>
+            <span class="item-title-price">$80 +tax</span>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- BUCHON -->
+  <section class="panel" role="tabpanel" data-category="buchon" aria-labelledby="tab-buchon" hidden>
+    <div class="panel-hero">
+      <h1>Buchón</h1>
+      <p class="panel-desc">Bold, oversized bouquets made to be seen.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter Buchón by size">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="1dozen" aria-pressed="false">1 Dozen</button>
+      <button class="filter-chip" data-filter="2dozen" aria-pressed="false">2 Dozen</button>
+      <button class="filter-chip" data-filter="3dozen" aria-pressed="false">3 Dozen</button>
+      <button class="filter-chip" data-filter="50roses" aria-pressed="false">50 Roses</button>
+      <button class="filter-chip" data-filter="special" aria-pressed="false">Special</button>
+    </div>
+
+    <ul class="catalog-list">
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo Buchón Clásico</span>
+            <span class="item-title-price">$90</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo Buchón XL</span>
+            <span class="item-title-price">$140</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn0.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo Mixto</span>
+            <span class="item-title-price">$75</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn12.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn13.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn14.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn15.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="1dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/1dozen/dzn16.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn12.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn13.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn14.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn15.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn15.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="2dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/2dozen/twodzn17.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="3dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/3dozen/threedzn1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="3dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/3dozen/threedzn2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="3dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/3dozen/threedzn3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="3dozen">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/3dozen/threedzn4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="50roses">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/50roses/fiftyroses1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="50roses">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/50roses/fiftyroses2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="50roses">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/50roses/fiftyroses3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="special">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/special/special11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Ramo a Color (custom)</span>
+            <span class="item-title-price">$110</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- VASE -->
+  <section class="panel" role="tabpanel" data-category="vase" aria-labelledby="tab-vase" hidden>
+    <div class="panel-hero">
+      <h1>Vase</h1>
+      <p class="panel-desc">Arrangements in a vase.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter vase pieces by style">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="glassvase" aria-pressed="false">Glass Vases</button>
+      <button class="filter-chip" data-filter="abanico" aria-pressed="false">Abanico</button>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="glassvase">
+        <div class="item-photo" aria-hidden="true"><img src="vase/glass/glass1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="abanico">
+        <div class="item-photo" aria-hidden="true"><img src="vase/abanico/abanico1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="glassvase">
+        <div class="item-photo" aria-hidden="true"><img src="vase/glass/glass2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="abanico">
+        <div class="item-photo" aria-hidden="true"><img src="vase/abanico/abanico2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="glassvase">
+        <div class="item-photo" aria-hidden="true"><img src="vase/glass/glass3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="abanico">
+        <div class="item-photo" aria-hidden="true"><img src="vase/abanico/abanico3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      
+      
+
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- BALLOONS -->
+  <section class="panel" role="tabpanel" data-category="balloons" aria-labelledby="tab-balloons" hidden>
+    <div class="panel-hero">
+      <h1>Balloons</h1>
+      <p class="panel-desc">Balloon pieces for celebrations, alone or with flowers.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter balloons by occasion">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="birthday" aria-pressed="false">Birthday</button>
+      <button class="filter-chip" data-filter="femalebirthday" aria-pressed="false">Bday Girl</button>
+      <button class="filter-chip" data-filter="malebirthday" aria-pressed="false">Bday Boy</button>
+      <button class="filter-chip" data-filter="love" aria-pressed="false">Love</button>
+      <button class="filter-chip" data-filter="welcome" aria-pressed="false">Welcome</button>
+      <button class="filter-chip" data-filter="tiktok" aria-pressed="false">TikTok</button>
+      <button class="filter-chip" data-filter="getwell" aria-pressed="false">Get Well</button>
+      <button class="filter-chip" data-filter="anniversary" aria-pressed="false">Anniversary</button>
+      <button class="filter-chip" data-filter="retirement" aria-pressed="false">Retirement</button>
+      <button class="filter-chip" data-filter="cartoon" aria-pressed="false">Cartoon</button>
+      <button class="filter-chip" data-filter="thankyou" aria-pressed="false">Thank You</button>
+      <button class="filter-chip" data-filter="quince" aria-pressed="false">Quince</button>
+
+      <!-- 
+      <button class="filter-chip" data-filter="mothersday" aria-pressed="false">Mother's Day</button>
+      <button class="filter-chip" data-filter="fathersday" aria-pressed="false">Father's Day</button>
+      <button class="filter-chip" data-filter="grad" aria-pressed="false">Grad</button>
+      -->
+
+    </div>
+
+    <!-- BIRTHDAY -->
+
+    <ul class="catalog-list">
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>         
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb5.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb6.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #6</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #7</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb8.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #8</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #9</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #10</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #11</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb12.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #12</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb13.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #13</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb14.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #14</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb15.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #15</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb16.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #16</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb17.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #17</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb18.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #18</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb19.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #19</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb20.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #20</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb21.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+              <span class="item-name">B-Day #21</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb22.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #22</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb23.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+              <span class="item-name">B-Day #23</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb24.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #24</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb25.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #25</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb26.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #26</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb27.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #27</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb28.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #28</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb29.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #29</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb30.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #30</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb31.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #31</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb32.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #32</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb33.png"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #33</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb34.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #34</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,malebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb35.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #35</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday,femalebirthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb36.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #36</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb37.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #37</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb38.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #38</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb39.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #39</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb40.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #40</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="birthday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/birthday/hb41.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">B-Day #41</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+
+      <!--LOVE-->
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #6</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #7</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #8</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #9</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #10</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #11</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--GRADUATION
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Graduation #6</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">25" Graduation #7</span>
+            <span class="item-title-price">$15 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="grad">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/grad/grad8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">25" Graduation #8</span>
+            <span class="item-title-price">$15 +tax</span>
+          </div>
+        </div>
+      </li>
+      -->
+
+      <!--WELCOME-->
+      <li class="catalog-item" data-tags="welcome">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/welcome/welcome1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Welcome #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="welcome">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/welcome/welcome2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Welcome #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="welcome">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/welcome/welcome3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Welcome #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="welcome">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/welcome/welcome4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Welcome #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--TIKTOK-->
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt5.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt6.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #6</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt7.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #7</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="tiktok">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/tiktok/tt8.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">TikTok #8</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--GETWELL-->
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/getwell/gw6.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Get Well #6</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--Anniversary-->
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/anni/an1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Anniversary #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/anni/an2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Anniversary #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/anni/an3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Anniversary #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/anni/an4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Anniversary #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--RETIREMENT-->
+      <li class="catalog-item" data-tags="retirement">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/retirement/r1.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Retirement #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="retirement">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/retirement/r2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Retirement #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--CARTOON-->
+      <li class="catalog-item" data-tags="cartoon">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/cartoon/cr1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Bluey #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="cartoon">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/cartoon/cr2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Smile Face #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--MOTHERS DAY
+      <li class="catalog-item" data-tags="mothersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/mothersday/md1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Mother's Day #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="mothersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/mothersday/md2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Mother's Day #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      -->
+
+      <!--FATHERS DAY
+      <li class="catalog-item" data-tags="fathersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/fathersday/fd1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Fathers Day #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="fathersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/fathersday/fd2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Fathers Day #2</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="fathersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/fathersday/fd3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Fathers Day #3</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="fathersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/fathersday/fd4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Fathers Day #4</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="fathersday">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/fathersday/fd5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Fathers Day #5</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+      -->
+
+      <!--THANK YOU-->
+      <li class="catalog-item" data-tags="thankyou">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/thankyou/ty1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Thank You #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <!--QUINCE-->
+      <li class="catalog-item" data-tags="quince">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/quince/quince1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Quince #1</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- Cards -->
+  <section class="panel" role="tabpanel" data-category="new" aria-labelledby="tab-new" hidden>
+    <div class="panel-hero">
+      <h1>Cards</h1>
+      <p class="panel-desc">Short description for this category.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter cards by occasion">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="bdayboy" aria-pressed="false">Bday Boy</button>
+      <button class="filter-chip" data-filter="bdaygirl" aria-pressed="false">Bday Girl</button>
+      <button class="filter-chip" data-filter="bdayneutral" aria-pressed="false">Bday Neutral</button>
+      <button class="filter-chip" data-filter="bdaykids" aria-pressed="false">Bday Kids</button>
+      <button class="filter-chip" data-filter="babyshower" aria-pressed="false">Baby Shower</button>
+      <button class="filter-chip" data-filter="anniversary" aria-pressed="false">Anniversary</button>
+      <button class="filter-chip" data-filter="getwell" aria-pressed="false">Get Well</button>
+      <button class="filter-chip" data-filter="congrats" aria-pressed="false">Congrats</button>
+      <button class="filter-chip" data-filter="graduation" aria-pressed="false">Graduation</button>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="bdayneutral">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/neutral/neutral0.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #1</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayneutral">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/neutral/neutral1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #2</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayneutral">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/neutral/neutral2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #3</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayneutral">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/neutral/neutral3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #4</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayneutral">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/neutral/neutral4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #5</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #6</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #7</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #8</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #9</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #10</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #11</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #12</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #13</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #14</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #15</span>
+            <span class="item-title-price">$4 +tax </span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #16</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #17</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #18</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #19</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy8.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #20</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #21</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy9.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #22</span>
+            <span class="item-title-price">$4 +tax </span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #23</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #24</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #25</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #26</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl12.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #27</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy12.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #28</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl13.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #29</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdayboy">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/boy/boy13.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #30</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl14.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #31</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl15.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #32</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaygirl">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/girl/girl16.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #33</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #34</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #35</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #36</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #37</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #38</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #39</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="bdaykids">
+        <div class="item-photo" aria-hidden="true"><img src="cards/bday/kids/kids7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #40</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="cards/getwell/getwell1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #41</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="getwell">
+        <div class="item-photo" aria-hidden="true"><img src="cards/getwell/getwell2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #42</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="cards/anni/anni1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #43</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="anniversary">
+        <div class="item-photo" aria-hidden="true"><img src="cards/anni/anni2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #44</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="babyshower">
+        <div class="item-photo" aria-hidden="true"><img src="cards/babyshower/babyshower1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #45</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="congrats">
+        <div class="item-photo" aria-hidden="true"><img src="cards/congrats/congrats1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #46</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="congrats">
+        <div class="item-photo" aria-hidden="true"><img src="cards/congrats/congrats2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #47</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="congrats">
+        <div class="item-photo" aria-hidden="true"><img src="cards/congrats/congrats3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #48</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="graduation">
+        <div class="item-photo" aria-hidden="true"><img src="cards/grad/grad1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #49</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="graduation">
+        <div class="item-photo" aria-hidden="true"><img src="cards/grad/grad2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Card #50</span>
+            <span class="item-title-price">$4 +tax</span>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+
+  <!-- MORE -->
+  <section class="panel" role="tabpanel" data-category="prom" aria-labelledby="tab-prom" hidden>
+    <div class="panel-hero">
+      <h1>More</h1>
+      <p class="panel-desc">Corsages &amp; boutonnieres for prom, homecoming, and weddings.</p>
+    </div>
+
+    <div class="filter-row" role="group" aria-label="Filter by occasion">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-chip" data-filter="prom" aria-pressed="false">Prom</button>
+      <button class="filter-chip" data-filter="wedding" aria-pressed="false">Wedding</button>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/boutonnier/boutonnier1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Item Name</span>
+            <span class="item-title-price">$##</span>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- YELLOW DAY 
+  <section class="panel" role="tabpanel" data-category="yellowday" aria-labelledby="tab-yellowday" hidden>
+    <div class="panel-hero">
+      <h1>Yellow Day</h1>
+      <p class="panel-desc">Yellow blooms for September's tradition.</p>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Sunlit Garden</span>
+            <span class="item-title-price">$100 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow7.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Manzanilla Rise</span>
+            <span class="item-title-price">$85 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Sunny Glass</span>
+            <span class="item-title-price">$85 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Shiny Mist</span>
+            <span class="item-title-price">$55 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow4.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Sunflower Romance</span>
+            <span class="item-title-price">$55 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow5.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Scarlet Glow</span>
+            <span class="item-title-price">$60 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow6.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Sunny Side</span>
+            <span class="item-title-price">$85 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow8.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Yellow Shine</span>
+            <span class="item-title-price">$65 +tax</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="yellowday/yellow9.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Bright Glow</span>
+            <span class="item-title-price">$120 +tax</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+-->
+
+</main>
+
+<footer class="site-footer">
+  <p>To order, message us — <a href="tel:5109321724">510 932 1724</a></p>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close image">&times;</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+    var indicator = document.querySelector('.nav-indicator');
+    var nav = document.querySelector('.nav');
+    var root = document.documentElement;
+    var navToggle = document.getElementById('nav-toggle');
+    var navCurrentLabel = document.getElementById('nav-current-label');
+
+    function closeMobileNav() {
+      if (!nav) return;
+      nav.classList.remove('open');
+      if (navToggle) {
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    if (navToggle) {
+      navToggle.addEventListener('click', function () {
+        var isOpen = nav.classList.toggle('open');
+        navToggle.classList.toggle('active', isOpen);
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!nav || !nav.classList.contains('open')) return;
+      if (nav.contains(e.target) || (navToggle && navToggle.contains(e.target))) return;
+      closeMobileNav();
+    });
+
+    var accentVar = {
+      home: '--accent-home',
+      sympathy: '--accent-sympathy',
+      buchon: '--accent-buchon',
+      balloons: '--accent-balloons',
+      new: '--accent-yellowday',
+      yellowday: '--accent-yellowday',
+      prom: '--accent-prom',
+      vase: '--accent-vase',
+      halloween: '--accent-halloween'
+    };
+
+    function moveIndicator(btn) {
+      if (!btn) return;
+      var navRect = nav.getBoundingClientRect();
+      var btnRect = btn.getBoundingClientRect();
+      indicator.style.width = btnRect.width + 'px';
+      indicator.style.transform = 'translateX(' + (btnRect.left - navRect.left) + 'px)';
+    }
+
+    function activate(cat, opts) {
+      opts = opts || {};
+      var animate = opts.animate !== false;
+
+      tabs.forEach(function (t) {
+        t.setAttribute('aria-selected', t.dataset.category === cat ? 'true' : 'false');
+      });
+
+      panels.forEach(function (p) {
+        if (p.dataset.category === cat) {
+          p.hidden = false;
+          if (animate) {
+            p.classList.remove('panel-enter');
+            void p.offsetWidth;
+            p.classList.add('panel-enter');
+          }
+        } else {
+          p.hidden = true;
+        }
+      });
+
+      var activeBtn = document.getElementById('tab-' + cat);
+      root.style.setProperty('--accent-active', 'var(' + accentVar[cat] + ')');
+      moveIndicator(activeBtn);
+      if (activeBtn && activeBtn.scrollIntoView) {
+        activeBtn.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'nearest', inline: 'center' });
+      }
+      if (navCurrentLabel && activeBtn) navCurrentLabel.textContent = activeBtn.textContent;
+      closeMobileNav();
+
+      try { sessionStorage.setItem('catalogActiveTab', cat); } catch (e) {}
+    }
+
+    tabs.forEach(function (btn) {
+      btn.addEventListener('click', function () { activate(btn.dataset.category); });
+    });
+
+    window.addEventListener('resize', function () {
+      var active = document.querySelector('.nav-link[aria-selected="true"]');
+      moveIndicator(active);
+    });
+
+    window.addEventListener('load', function () {
+      var saved = null;
+      try { saved = sessionStorage.getItem('catalogActiveTab'); } catch (e) {}
+      var initial = (saved && document.getElementById('tab-' + saved)) ? saved : 'home';
+      activate(initial, { animate: false });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+          moveIndicator(document.querySelector('.nav-link[aria-selected="true"]'));
+        });
+      }
+    });
+
+    // Image lightbox — click any photo to view it larger
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var lightboxClose = document.getElementById('lightbox-close');
+
+    function openLightbox(src, alt) {
+      if (!lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox() {
+      if (!lightbox || !lightboxImg) return;
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+    }
+
+    Array.prototype.slice.call(document.querySelectorAll('.item-photo')).forEach(function (photo) {
+      photo.addEventListener('click', function () {
+        var img = photo.querySelector('img');
+        if (img) openLightbox(img.src, img.alt);
+      });
+    });
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) {
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Category filters — each panel's filter row only affects that panel's own items
+    var filterRows = Array.prototype.slice.call(document.querySelectorAll('.filter-row'));
+    filterRows.forEach(function (row) {
+      var panel = row.closest('.panel');
+      if (!panel) return;
+      var chips = Array.prototype.slice.call(row.querySelectorAll('.filter-chip'));
+      var items = Array.prototype.slice.call(panel.querySelectorAll('.catalog-item'));
+      var emptyMsg = panel.querySelector('.filter-empty');
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+          if (chip.scrollIntoView) chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          var filter = chip.dataset.filter;
+          var visible = 0;
+          items.forEach(function (li) {
+            var tags = (li.dataset.tags || '').split(',');
+            var show = filter === 'all' || tags.indexOf(filter) !== -1;
+            li.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+          if (emptyMsg) emptyMsg.hidden = visible > 0;
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
