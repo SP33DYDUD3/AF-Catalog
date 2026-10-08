@@ -151,6 +151,27 @@
   .nav-toggle.active .nav-toggle-icon span:nth-child(2) { opacity: 0; }
   .nav-toggle.active .nav-toggle-icon span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+  /* Language toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 20;
+    appearance: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    transition: background-color .2s ease, color .2s ease;
+  }
+  .lang-toggle:hover { background: var(--color-bg-alt); }
+
   main { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; }
 
   .panel-hero {
@@ -387,6 +408,13 @@
     .filter-row::-webkit-scrollbar { display: none; }
     .filter-chip { flex-shrink: 0; }
 
+    .lang-toggle {
+      top: 0.9rem;
+      left: 0.9rem;
+      font-size: 0.72rem;
+      padding: 0.4rem 0.7rem;
+    }
+
     .catalog-list,
     .panel[data-category="balloons"] .catalog-list,
     .panel[data-category="new"] .catalog-list {
@@ -398,6 +426,8 @@
 </head>
 <body>
 
+<button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to Spanish">ES</button>
+
 <div class="nav-wrap">
   <div class="nav-mobile-bar">
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav">
@@ -406,14 +436,14 @@
   </div>
   <nav class="nav" id="main-nav" role="tablist" aria-label="Catalog categories">
     <div class="nav-indicator" aria-hidden="true"></div>
-    <button class="nav-link" role="tab" aria-selected="true" data-category="home" id="tab-home">How To Order</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="halloween" id="tab-halloween">Halloween</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="sympathy" id="tab-sympathy">Sympathy</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="buchon" id="tab-buchon">Buchón</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="vase" id="tab-vase">Vase</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="balloons" id="tab-balloons">Balloons</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="new" id="tab-new">Cards</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom">More</button>
+    <button class="nav-link" role="tab" aria-selected="true" data-category="home" id="tab-home" data-i18n="title.home">How To Order</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="halloween" id="tab-halloween" data-i18n="title.halloween">Halloween</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="sympathy" id="tab-sympathy" data-i18n="title.sympathy">Sympathy</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="buchon" id="tab-buchon" data-i18n="title.buchon">Buchón</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="vase" id="tab-vase" data-i18n="title.vase">Vase</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="balloons" id="tab-balloons" data-i18n="title.balloons">Balloons</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="new" id="tab-new" data-i18n="title.cards">Cards</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom" data-i18n="title.more">More</button>
 
     <!--
     <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom">More</button>
@@ -428,35 +458,35 @@
   <!-- HOME / HOW TO ORDER -->
   <section class="panel" role="tabpanel" data-category="home" aria-labelledby="tab-home">
     <div class="panel-hero">
-      <h1>How to Order</h1>
-      <p class="panel-desc">Welcome, to our catalog, hope you find what you're looking for. A few things to know before you reach out.</p>
+      <h1 data-i18n="title.home">How to Order</h1>
+      <p class="panel-desc" data-i18n="desc.home">Welcome, to our catalog, hope you find what you're looking for. A few things to know before you reach out.</p>
     </div>
     <div class="info-content">
       <div class="info-block">
-        <h2>Disclaimer</h2>
-        <p>This catalog site is a work in progress. You may not find pricing on all our listings but can still reach out for more information
+        <h2 data-i18n="home.h2disclaimer">Disclaimer</h2>
+        <p data-i18n="home.pdisclaimer">This catalog site is a work in progress. You may not find pricing on all our listings but can still reach out for more information
           based on the listing of your choice. Thanks!
         </p>
       </div>
       <div class="info-block">
-        <h2>Time to Order</h2>
-        <p>Please order at least 3 days in advance. Significantly larger arrangements may need 4 - 5 days. We do take same-day requests, it just depends on floral availability that we have at the time.</p>
+        <h2 data-i18n="home.h2time">Time to Order</h2>
+        <p data-i18n="home.ptime">Please order at least 3 days in advance. Significantly larger arrangements may need 4 - 5 days. We do take same-day requests, it just depends on floral availability that we have at the time.</p>
       </div>
       <div class="info-block">
-        <h2>The process</h2>
+        <h2 data-i18n="home.h2process">The process</h2>
         <ol>
-          <li>Browse and reach out with the name and date you need it for.</li>
-          <li>We'll confirm the details with you and provide a final price.</li>
-          <li>Payment is processed and the order is confirmed.</li>
+          <li data-i18n="home.step1">Browse and reach out with the name and date you need it for.</li>
+          <li data-i18n="home.step2">We'll confirm the details with you and provide a final price.</li>
+          <li data-i18n="home.step3">Payment is processed and the order is confirmed.</li>
         </ol>
       </div>
       <div class="info-block">
-        <h2>Payment &amp; Deposit</h2>
-        <p>We accept payment over the phone or via Zelle. You're also welcome to stop by in person before the order is due. A non-refundable 25% deposit of the arrangement's price is required to confirm your order.</p>
+        <h2 data-i18n="home.h2payment">Payment &amp; Deposit</h2>
+        <p data-i18n="home.ppayment">We accept payment over the phone or via Zelle. You're also welcome to stop by in person before the order is due. A non-refundable 25% deposit of the arrangement's price is required to confirm your order.</p>
       </div>
       <div class="info-block">
-        <h2>Delivery</h2>
-        <p>Delivery is $15 within Richmond and San Pablo. For neighboring cities, please check with us on availability and pricing.</p>
+        <h2 data-i18n="home.h2delivery">Delivery</h2>
+        <p data-i18n="home.pdelivery">Delivery is $15 within Richmond and San Pablo. For neighboring cities, please check with us on availability and pricing.</p>
       </div>
     </div>
   </section>
@@ -464,8 +494,8 @@
   <!-- HALLOWEEN -->
   <section class="panel" role="tabpanel" data-category="halloween" aria-labelledby="tab-halloween" hidden>
     <div class="panel-hero">
-      <h1>Halloween</h1>
-      <p class="panel-desc">Spooky season arrangements and gifts.</p>
+      <h1 data-i18n="title.halloween">Halloween</h1>
+      <p class="panel-desc" data-i18n="desc.halloween">Spooky season arrangements and gifts.</p>
     </div>
     <ul class="catalog-list">
 
@@ -524,25 +554,25 @@
         </div>
       </li>
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- SYMPATHY -->
   <section class="panel" role="tabpanel" data-category="sympathy" aria-labelledby="tab-sympathy" hidden>
     <div class="panel-hero">
-      <h1>Sympathy</h1>
-      <p class="panel-desc">Quiet arrangements for difficult days.</p>
+      <h1 data-i18n="title.sympathy">Sympathy</h1>
+      <p class="panel-desc" data-i18n="desc.sympathy">Quiet arrangements for difficult days.</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter sympathy pieces by style">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="wreath" aria-pressed="false">Wreaths</button>
-      <button class="filter-chip" data-filter="spray" aria-pressed="false">Sprays</button>
-      <button class="filter-chip" data-filter="casket" aria-pressed="false">Casket</button>
-      <button class="filter-chip" data-filter="cross" aria-pressed="false">Cross</button>
-      <button class="filter-chip" data-filter="heart" aria-pressed="false">Heart</button>
-      <button class="filter-chip" data-filter="abanico" aria-pressed="false">Abanico</button>
-      <button class="filter-chip" data-filter="vase" aria-pressed="false">Vase</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="wreath" aria-pressed="false" data-i18n="sympathy.wreath">Wreaths</button>
+      <button class="filter-chip" data-filter="spray" aria-pressed="false" data-i18n="sympathy.spray">Sprays</button>
+      <button class="filter-chip" data-filter="casket" aria-pressed="false" data-i18n="sympathy.casket">Casket</button>
+      <button class="filter-chip" data-filter="cross" aria-pressed="false" data-i18n="sympathy.cross">Cross</button>
+      <button class="filter-chip" data-filter="heart" aria-pressed="false" data-i18n="sympathy.heart">Heart</button>
+      <button class="filter-chip" data-filter="abanico" aria-pressed="false" data-i18n="abanico">Abanico</button>
+      <button class="filter-chip" data-filter="vase" aria-pressed="false" data-i18n="title.vase">Vase</button>
     </div>
 
     <ul class="catalog-list">
@@ -781,23 +811,23 @@
       </li>
 
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- BUCHON -->
   <section class="panel" role="tabpanel" data-category="buchon" aria-labelledby="tab-buchon" hidden>
     <div class="panel-hero">
-      <h1>Buchón</h1>
-      <p class="panel-desc">Bold, oversized bouquets made to be seen.</p>
+      <h1 data-i18n="title.buchon">Buchón</h1>
+      <p class="panel-desc" data-i18n="desc.buchon">Bold, oversized bouquets made to be seen.</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter Buchón by size">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="1dozen" aria-pressed="false">1 Dozen</button>
-      <button class="filter-chip" data-filter="2dozen" aria-pressed="false">2 Dozen</button>
-      <button class="filter-chip" data-filter="3dozen" aria-pressed="false">3 Dozen</button>
-      <button class="filter-chip" data-filter="50roses" aria-pressed="false">50 Roses</button>
-      <button class="filter-chip" data-filter="special" aria-pressed="false">Special</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="1dozen" aria-pressed="false" data-i18n="buchon.1dozen">1 Dozen</button>
+      <button class="filter-chip" data-filter="2dozen" aria-pressed="false" data-i18n="buchon.2dozen">2 Dozen</button>
+      <button class="filter-chip" data-filter="3dozen" aria-pressed="false" data-i18n="buchon.3dozen">3 Dozen</button>
+      <button class="filter-chip" data-filter="50roses" aria-pressed="false" data-i18n="buchon.50roses">50 Roses</button>
+      <button class="filter-chip" data-filter="special" aria-pressed="false" data-i18n="buchon.special">Special</button>
     </div>
 
     <ul class="catalog-list">
@@ -1274,20 +1304,20 @@
         </div>
       </li>
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- VASE -->
   <section class="panel" role="tabpanel" data-category="vase" aria-labelledby="tab-vase" hidden>
     <div class="panel-hero">
-      <h1>Vase</h1>
-      <p class="panel-desc">Arrangements in a vase.</p>
+      <h1 data-i18n="title.vase">Vase</h1>
+      <p class="panel-desc" data-i18n="desc.vase">Arrangements in a vase.</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter vase pieces by style">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="glassvase" aria-pressed="false">Glass Vases</button>
-      <button class="filter-chip" data-filter="abanico" aria-pressed="false">Abanico</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="glassvase" aria-pressed="false" data-i18n="vase.glassvase">Glass Vases</button>
+      <button class="filter-chip" data-filter="abanico" aria-pressed="false" data-i18n="abanico">Abanico</button>
     </div>
 
     <ul class="catalog-list">
@@ -1348,30 +1378,30 @@
       </li>
 
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- BALLOONS -->
   <section class="panel" role="tabpanel" data-category="balloons" aria-labelledby="tab-balloons" hidden>
     <div class="panel-hero">
-      <h1>Balloons</h1>
-      <p class="panel-desc">Balloon pieces for celebrations, alone or with flowers.</p>
+      <h1 data-i18n="title.balloons">Balloons</h1>
+      <p class="panel-desc" data-i18n="desc.balloons">Balloon pieces for celebrations, alone or with flowers.</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter balloons by occasion">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="birthday" aria-pressed="false">Birthday</button>
-      <button class="filter-chip" data-filter="femalebirthday" aria-pressed="false">Bday Girl</button>
-      <button class="filter-chip" data-filter="malebirthday" aria-pressed="false">Bday Boy</button>
-      <button class="filter-chip" data-filter="love" aria-pressed="false">Love</button>
-      <button class="filter-chip" data-filter="welcome" aria-pressed="false">Welcome</button>
-      <button class="filter-chip" data-filter="tiktok" aria-pressed="false">TikTok</button>
-      <button class="filter-chip" data-filter="getwell" aria-pressed="false">Get Well</button>
-      <button class="filter-chip" data-filter="anniversary" aria-pressed="false">Anniversary</button>
-      <button class="filter-chip" data-filter="retirement" aria-pressed="false">Retirement</button>
-      <button class="filter-chip" data-filter="cartoon" aria-pressed="false">Cartoon</button>
-      <button class="filter-chip" data-filter="thankyou" aria-pressed="false">Thank You</button>
-      <button class="filter-chip" data-filter="quince" aria-pressed="false">Quince</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="birthday" aria-pressed="false" data-i18n="balloons.birthday">Birthday</button>
+      <button class="filter-chip" data-filter="femalebirthday" aria-pressed="false" data-i18n="balloons.femalebirthday">Bday Girl</button>
+      <button class="filter-chip" data-filter="malebirthday" aria-pressed="false" data-i18n="balloons.malebirthday">Bday Boy</button>
+      <button class="filter-chip" data-filter="love" aria-pressed="false" data-i18n="balloons.love">Love</button>
+      <button class="filter-chip" data-filter="welcome" aria-pressed="false" data-i18n="balloons.welcome">Welcome</button>
+      <button class="filter-chip" data-filter="tiktok" aria-pressed="false" data-i18n="balloons.tiktok">TikTok</button>
+      <button class="filter-chip" data-filter="getwell" aria-pressed="false" data-i18n="getwell">Get Well</button>
+      <button class="filter-chip" data-filter="anniversary" aria-pressed="false" data-i18n="anniversary">Anniversary</button>
+      <button class="filter-chip" data-filter="retirement" aria-pressed="false" data-i18n="balloons.retirement">Retirement</button>
+      <button class="filter-chip" data-filter="cartoon" aria-pressed="false" data-i18n="balloons.cartoon">Cartoon</button>
+      <button class="filter-chip" data-filter="thankyou" aria-pressed="false" data-i18n="balloons.thankyou">Thank You</button>
+      <button class="filter-chip" data-filter="quince" aria-pressed="false" data-i18n="balloons.quince">Quince</button>
 
       <!-- 
       <button class="filter-chip" data-filter="mothersday" aria-pressed="false">Mother's Day</button>
@@ -1855,6 +1885,15 @@
           </div>
         </div>
       </li>
+      <li class="catalog-item" data-tags="love">
+        <div class="item-photo" aria-hidden="true"><img src="balloons/love/love12.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Love #12</span>
+            <span class="item-title-price">$7 +tax</span>
+          </div>
+        </div>
+      </li>
 
       <!--WELCOME-->
       <li class="catalog-item" data-tags="welcome">
@@ -2124,27 +2163,27 @@
         </div>
       </li>
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- Cards -->
   <section class="panel" role="tabpanel" data-category="new" aria-labelledby="tab-new" hidden>
     <div class="panel-hero">
-      <h1>Cards</h1>
-      <p class="panel-desc">Short description for this category.</p>
+      <h1 data-i18n="title.cards">Cards</h1>
+      <p class="panel-desc" data-i18n="desc.cards">Cards for the perfect small detail</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter cards by occasion">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="bdayboy" aria-pressed="false">Bday Boy</button>
-      <button class="filter-chip" data-filter="bdaygirl" aria-pressed="false">Bday Girl</button>
-      <button class="filter-chip" data-filter="bdayneutral" aria-pressed="false">Bday Neutral</button>
-      <button class="filter-chip" data-filter="bdaykids" aria-pressed="false">Bday Kids</button>
-      <button class="filter-chip" data-filter="babyshower" aria-pressed="false">Baby Shower</button>
-      <button class="filter-chip" data-filter="anniversary" aria-pressed="false">Anniversary</button>
-      <button class="filter-chip" data-filter="getwell" aria-pressed="false">Get Well</button>
-      <button class="filter-chip" data-filter="congrats" aria-pressed="false">Congrats</button>
-      <button class="filter-chip" data-filter="graduation" aria-pressed="false">Graduation</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="bdayboy" aria-pressed="false" data-i18n="cards.bdayboy">Bday Boy</button>
+      <button class="filter-chip" data-filter="bdaygirl" aria-pressed="false" data-i18n="cards.bdaygirl">Bday Girl</button>
+      <button class="filter-chip" data-filter="bdayneutral" aria-pressed="false" data-i18n="cards.bdayneutral">Bday Neutral</button>
+      <button class="filter-chip" data-filter="bdaykids" aria-pressed="false" data-i18n="cards.bdaykids">Bday Kids</button>
+      <button class="filter-chip" data-filter="babyshower" aria-pressed="false" data-i18n="cards.babyshower">Baby Shower</button>
+      <button class="filter-chip" data-filter="anniversary" aria-pressed="false" data-i18n="anniversary">Anniversary</button>
+      <button class="filter-chip" data-filter="getwell" aria-pressed="false" data-i18n="getwell">Get Well</button>
+      <button class="filter-chip" data-filter="congrats" aria-pressed="false" data-i18n="cards.congrats">Congrats</button>
+      <button class="filter-chip" data-filter="graduation" aria-pressed="false" data-i18n="cards.graduation">Graduation</button>
     </div>
 
     <ul class="catalog-list">
@@ -2604,21 +2643,21 @@
       </li>
 
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
 
   <!-- MORE -->
   <section class="panel" role="tabpanel" data-category="prom" aria-labelledby="tab-prom" hidden>
     <div class="panel-hero">
-      <h1>More</h1>
-      <p class="panel-desc">Corsages &amp; boutonnieres for prom, homecoming, and weddings.</p>
+      <h1 data-i18n="title.more">More</h1>
+      <p class="panel-desc" data-i18n="desc.more">Corsages &amp; boutonnieres for prom, homecoming, and weddings.</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter by occasion">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-chip" data-filter="prom" aria-pressed="false">Prom</button>
-      <button class="filter-chip" data-filter="wedding" aria-pressed="false">Wedding</button>
+      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
+      <button class="filter-chip" data-filter="prom" aria-pressed="false" data-i18n="more.prom">Prom</button>
+      <button class="filter-chip" data-filter="wedding" aria-pressed="false" data-i18n="more.wedding">Wedding</button>
     </div>
 
     <ul class="catalog-list">
@@ -2742,7 +2781,7 @@
         </div>
       </li>
     </ul>
-    <p class="filter-empty" hidden>No items in this category yet — check back soon.</p>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
 
   <!-- YELLOW DAY 
@@ -2850,7 +2889,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>To order, message us — <a href="tel:5109321724">510 932 1724</a></p>
+  <p><span data-i18n="footer.text">To order, message us —</span> <a href="tel:5109321724">510 932 1724</a></p>
 </footer>
 
 <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -2998,6 +3037,112 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // Spanish translation toggle — swaps tagged text between English and Spanish
+    var translations = {
+      all: 'Todos',
+      emptyMessage: 'Aún no hay artículos en esta categoría — vuelve pronto.',
+      abanico: 'Abanico',
+      getwell: 'Mejórate',
+      anniversary: 'Aniversario',
+      'title.home': 'Cómo Ordenar',
+      'title.halloween': 'Halloween',
+      'title.sympathy': 'Condolencias',
+      'title.buchon': 'Buchón',
+      'title.vase': 'Florero',
+      'title.balloons': 'Globos',
+      'title.cards': 'Tarjetas',
+      'title.more': 'Más',
+      'desc.home': 'Bienvenido a nuestro catálogo, esperamos que encuentres lo que buscas. Algunas cosas que debes saber antes de contactarnos.',
+      'desc.halloween': 'Arreglos y regalos de la temporada de Halloween.',
+      'desc.sympathy': 'Arreglos serenos para días difíciles.',
+      'desc.buchon': 'Ramos grandes y llamativos hechos para destacar.',
+      'desc.vase': 'Arreglos en florero.',
+      'desc.balloons': 'Globos para celebraciones, solos o con flores.',
+      'desc.cards': 'Tarjetas para el pequeño detalle perfecto',
+      'desc.more': 'Corsages y boutonnieres para el baile de graduación, homecoming y bodas.',
+      'home.h2disclaimer': 'Aviso',
+      'home.pdisclaimer': 'Este sitio de catálogo está en construcción. Es posible que no encuentre precios en todos nuestros artículos, pero aún puede contactarnos para más información sobre el artículo de su elección. ¡Gracias!',
+      'home.h2time': 'Tiempo de Anticipación',
+      'home.ptime': 'Por favor ordene con al menos 3 días de anticipación. Los arreglos considerablemente más grandes pueden necesitar de 4 a 5 días. Aceptamos pedidos el mismo día, dependiendo de la disponibilidad de flores que tengamos en ese momento.',
+      'home.h2process': 'El Proceso',
+      'home.step1': 'Explore y contáctenos con el nombre y la fecha para la que lo necesita.',
+      'home.step2': 'Confirmaremos los detalles con usted y le daremos un precio final.',
+      'home.step3': 'Se procesa el pago y se confirma el pedido.',
+      'home.h2payment': 'Pago y Depósito',
+      'home.ppayment': "Aceptamos pagos por teléfono o por Zelle. También puede pasar en persona antes de la fecha del pedido. Se requiere un depósito no reembolsable del 25% del precio del arreglo para confirmar su pedido.",
+      'home.h2delivery': 'Entrega',
+      'home.pdelivery': 'La entrega tiene un costo de $15 dentro de Richmond y San Pablo. Para ciudades vecinas, consulte con nosotros sobre disponibilidad y precio.',
+      'sympathy.wreath': 'Coronas',
+      'sympathy.spray': 'Sprays',
+      'sympathy.casket': 'Ataúd',
+      'sympathy.cross': 'Cruz',
+      'sympathy.heart': 'Corazón',
+      'buchon.1dozen': '1 Docena',
+      'buchon.2dozen': '2 Docenas',
+      'buchon.3dozen': '3 Docenas',
+      'buchon.50roses': '50 Rosas',
+      'buchon.special': 'Especial',
+      'vase.glassvase': 'Floreros de Vidrio',
+      'balloons.birthday': 'Cumpleaños',
+      'balloons.femalebirthday': 'Cumple Niña',
+      'balloons.malebirthday': 'Cumple Niño',
+      'balloons.love': 'Amor',
+      'balloons.welcome': 'Bienvenida',
+      'balloons.tiktok': 'TikTok',
+      'balloons.retirement': 'Jubilación',
+      'balloons.cartoon': 'Caricatura',
+      'balloons.thankyou': 'Gracias',
+      'balloons.quince': 'Quince',
+      'cards.bdayboy': 'Cumple Niño',
+      'cards.bdaygirl': 'Cumple Niña',
+      'cards.bdayneutral': 'Cumple Neutral',
+      'cards.bdaykids': 'Cumple Niños',
+      'cards.babyshower': 'Baby Shower',
+      'cards.congrats': 'Felicidades',
+      'cards.graduation': 'Graduación',
+      'more.prom': 'Graduación (Baile)',
+      'more.wedding': 'Boda',
+      'footer.text': 'Para ordenar, envíanos un mensaje —'
+    };
+
+    var i18nEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+    i18nEls.forEach(function (el) { el.dataset.i18nEn = el.textContent; });
+
+    var langToggle = document.getElementById('lang-toggle');
+    var currentLang = 'en';
+
+    function applyLang(lang) {
+      currentLang = lang;
+      i18nEls.forEach(function (el) {
+        var key = el.dataset.i18n;
+        if (lang === 'es' && translations[key]) {
+          el.textContent = translations[key];
+        } else {
+          el.textContent = el.dataset.i18nEn;
+        }
+      });
+      document.documentElement.lang = lang;
+      if (langToggle) {
+        langToggle.textContent = lang === 'es' ? 'EN' : 'ES';
+        langToggle.setAttribute('aria-label', lang === 'es' ? 'Switch to English' : 'Switch to Spanish');
+      }
+      // Re-measure the active tab's underline since label widths change between languages
+      moveIndicator(document.querySelector('.nav-link[aria-selected="true"]'));
+      try { localStorage.setItem('catalogLang', lang); } catch (e) {}
+    }
+
+    if (langToggle) {
+      langToggle.addEventListener('click', function () {
+        applyLang(currentLang === 'es' ? 'en' : 'es');
+      });
+    }
+
+    (function initLang() {
+      var saved = null;
+      try { saved = localStorage.getItem('catalogLang'); } catch (e) {}
+      if (saved === 'es') applyLang('es');
+    })();
 
     // Category filters — each panel's filter row only affects that panel's own items
     var filterRows = Array.prototype.slice.call(document.querySelectorAll('.filter-row'));
