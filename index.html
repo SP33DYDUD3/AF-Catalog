@@ -22,6 +22,7 @@
     --accent-prom: #7A5C99;
     --accent-vase: #B3714F;
     --accent-halloween: #C06B1F;
+    --accent-wedding: #8C7A54;
     --accent-active: var(--accent-home);
     --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
     --font-body: 'Work Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -41,6 +42,7 @@
       --accent-prom: #B79BD1;
       --accent-vase: #D99B78;
       --accent-halloween: #E8954D;
+      --accent-wedding: #D4BE8C;
     }
   }
   :root[data-theme="dark"] {
@@ -56,6 +58,7 @@
     --accent-prom: #B79BD1;
     --accent-vase: #D99B78;
     --accent-halloween: #E8954D;
+    --accent-wedding: #D4BE8C;
   }
 
   * { box-sizing: border-box; }
@@ -437,17 +440,18 @@
   <nav class="nav" id="main-nav" role="tablist" aria-label="Catalog categories">
     <div class="nav-indicator" aria-hidden="true"></div>
     <button class="nav-link" role="tab" aria-selected="true" data-category="home" id="tab-home" data-i18n="title.home">How To Order</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="halloween" id="tab-halloween" data-i18n="title.halloween">Halloween</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="sympathy" id="tab-sympathy" data-i18n="title.sympathy">Sympathy</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="buchon" id="tab-buchon" data-i18n="title.buchon">Buchón</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="vase" id="tab-vase" data-i18n="title.vase">Vase</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="wedding" id="tab-wedding" data-i18n="title.wedding">Wedding</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom" data-i18n="title.prom">Prom</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="balloons" id="tab-balloons" data-i18n="title.balloons">Balloons</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="new" id="tab-new" data-i18n="title.cards">Cards</button>
-    <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom" data-i18n="title.more">More</button>
 
     <!--
     <button class="nav-link" role="tab" aria-selected="false" data-category="prom" id="tab-prom">More</button>
     <button class="nav-link" role="tab" aria-selected="false" data-category="yellowday" id="tab-yellowday">Yellow Day</button>
+    <button class="nav-link" role="tab" aria-selected="false" data-category="halloween" id="tab-halloween" data-i18n="title.halloween">Halloween</button>
     -->
   
   </nav>
@@ -459,7 +463,7 @@
   <section class="panel" role="tabpanel" data-category="home" aria-labelledby="tab-home">
     <div class="panel-hero">
       <h1 data-i18n="title.home">How to Order</h1>
-      <p class="panel-desc" data-i18n="desc.home">Welcome, to our catalog, hope you find what you're looking for. A few things to know before you reach out.</p>
+      <p class="panel-desc" data-i18n="desc.home">Welcome to our catalog, hope you find what you're looking for. A few things to know before you reach out.</p>
     </div>
     <div class="info-content">
       <div class="info-block">
@@ -491,7 +495,8 @@
     </div>
   </section>
 
-  <!-- HALLOWEEN -->
+
+  <!-- HALLOWEEN 
   <section class="panel" role="tabpanel" data-category="halloween" aria-labelledby="tab-halloween" hidden>
     <div class="panel-hero">
       <h1 data-i18n="title.halloween">Halloween</h1>
@@ -500,16 +505,16 @@
     <ul class="catalog-list">
 
       <li class="catalog-item">
-        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween1.jpeg"></div>
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween1.JPG"></div>
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #1</span>
-            <span class="item-title-price">$120 +tax</span>
+            <span class="item-title-price">$125 +tax</span>
           </div>
         </div>
       </li>
       <li class="catalog-item">
-        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween2.jpeg"></div>
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween2.JPG"></div>
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #2</span>
@@ -518,11 +523,11 @@
         </div>
       </li>
       <li class="catalog-item">
-        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween3.jpeg"></div>
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween3.JPG"></div>
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #3</span>
-            <span class="item-title-price">$55 +tax</span>
+            <span class="item-title-price">$110 +tax</span>
           </div>
         </div>
       </li>
@@ -531,7 +536,7 @@
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #4</span>
-            <span class="item-title-price">$110 +tax</span>
+            <span class="item-title-price">$115 +tax</span>
           </div>
         </div>
       </li>
@@ -540,7 +545,7 @@
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #5</span>
-            <span class="item-title-price">$55 +tax</span>
+            <span class="item-title-price">$130 +tax</span>
           </div>
         </div>
       </li>
@@ -549,19 +554,65 @@
         <div class="item-info">
           <div class="item-title-row">
             <span class="item-name">Halloween #6</span>
-            <span class="item-title-price">$70 +tax</span>
+            <span class="item-title-price">$105 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Halloween #7</span>
+            <span class="item-title-price">$55 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween8.JPG"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Halloween #8</span>
+            <span class="item-title-price">$115 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween9.JPG"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Halloween #9</span>
+            <span class="item-title-price">$125 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween10.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Halloween #10</span>
+            <span class="item-title-price">$55 +tax</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item">
+        <div class="item-photo" aria-hidden="true"><img src="buchon/halloween/halloween11.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Halloween #11</span>
+            <span class="item-title-price">$60 +tax</span>
           </div>
         </div>
       </li>
     </ul>
     <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
+  -->
 
   <!-- SYMPATHY -->
   <section class="panel" role="tabpanel" data-category="sympathy" aria-labelledby="tab-sympathy" hidden>
     <div class="panel-hero">
       <h1 data-i18n="title.sympathy">Sympathy</h1>
-      <p class="panel-desc" data-i18n="desc.sympathy">Quiet arrangements for difficult days.</p>
+      <p class="panel-desc" data-i18n="desc.sympathy">Order a casket & 2 side pieces for 15% off!</p>
     </div>
 
     <div class="filter-row" role="group" aria-label="Filter sympathy pieces by style">
@@ -1377,6 +1428,149 @@
         </div>
       </li>
 
+    </ul>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- WEDDING -->
+  <section class="panel" role="tabpanel" data-category="wedding" aria-labelledby="tab-wedding" hidden>
+    <div class="panel-hero">
+      <h1 data-i18n="title.wedding">Wedding</h1>
+      <p class="panel-desc" data-i18n="desc.wedding">Florals for your wedding day.</p>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #1</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding2.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #2</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding3.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #3</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #4</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #5</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding6.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #6</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="wedding">
+        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding7.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Wedding #7</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
+  </section>
+
+  <!-- PROM -->
+  <section class="panel" role="tabpanel" data-category="prom" aria-labelledby="tab-prom" hidden>
+    <div class="panel-hero">
+      <h1 data-i18n="title.prom">Prom</h1>
+      <p class="panel-desc" data-i18n="desc.prom">Corsages &amp; boutonnieres for prom and homecoming.</p>
+    </div>
+
+    <ul class="catalog-list">
+
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Corsage #1</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/boutonnier/boutonnier1.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Boutonnier #1</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage2.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Corsage #2</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage3.jpg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Corsage #3</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage4.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Corsage #4</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
+      <li class="catalog-item" data-tags="prom">
+        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage5.jpeg"></div>
+        <div class="item-info">
+          <div class="item-title-row">
+            <span class="item-name">Corsage #5</span>
+            <span class="item-title-price">WIP</span>
+          </div>
+        </div>
+      </li>
     </ul>
     <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
   </section>
@@ -2647,144 +2841,7 @@
   </section>
 
 
-  <!-- MORE -->
-  <section class="panel" role="tabpanel" data-category="prom" aria-labelledby="tab-prom" hidden>
-    <div class="panel-hero">
-      <h1 data-i18n="title.more">More</h1>
-      <p class="panel-desc" data-i18n="desc.more">Corsages &amp; boutonnieres for prom, homecoming, and weddings.</p>
-    </div>
-
-    <div class="filter-row" role="group" aria-label="Filter by occasion">
-      <button class="filter-chip" data-filter="all" aria-pressed="true" data-i18n="all">All</button>
-      <button class="filter-chip" data-filter="prom" aria-pressed="false" data-i18n="more.prom">Prom</button>
-      <button class="filter-chip" data-filter="wedding" aria-pressed="false" data-i18n="more.wedding">Wedding</button>
-    </div>
-
-    <ul class="catalog-list">
-
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage1.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Corsage #1</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/boutonnier/boutonnier1.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Boutonnier #1</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage2.jpg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Corsage #2</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage3.jpg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Corsage #3</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage4.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Corsage #4</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="prom">
-        <div class="item-photo" aria-hidden="true"><img src="more/prom/corsage/corsage5.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Corsage #5</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding1.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #1</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding2.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #2</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding3.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #3</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding4.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #4</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding5.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #5</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding6.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #6</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-      <li class="catalog-item" data-tags="wedding">
-        <div class="item-photo" aria-hidden="true"><img src="more/wedding/wedding7.jpeg"></div>
-        <div class="item-info">
-          <div class="item-title-row">
-            <span class="item-name">Wedding #7</span>
-            <span class="item-title-price">WIP</span>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <p class="filter-empty" hidden data-i18n="emptyMessage">No items in this category yet — check back soon.</p>
-  </section>
-
-  <!-- YELLOW DAY 
+  <!-- YELLOW DAY
   <section class="panel" role="tabpanel" data-category="yellowday" aria-labelledby="tab-yellowday" hidden>
     <div class="panel-hero">
       <h1>Yellow Day</h1>
@@ -2938,7 +2995,8 @@
       yellowday: '--accent-yellowday',
       prom: '--accent-prom',
       vase: '--accent-vase',
-      halloween: '--accent-halloween'
+      halloween: '--accent-halloween',
+      wedding: '--accent-wedding'
     };
 
     function moveIndicator(btn) {
@@ -3052,15 +3110,17 @@
       'title.vase': 'Florero',
       'title.balloons': 'Globos',
       'title.cards': 'Tarjetas',
-      'title.more': 'Más',
+      'title.wedding': 'Boda',
+      'title.prom': 'Graduación (Baile)',
       'desc.home': 'Bienvenido a nuestro catálogo, esperamos que encuentres lo que buscas. Algunas cosas que debes saber antes de contactarnos.',
       'desc.halloween': 'Arreglos y regalos de la temporada de Halloween.',
-      'desc.sympathy': 'Arreglos serenos para días difíciles.',
+      'desc.sympathy': 'Ordene un arreglo para la ataúd y 2 arreglos laterales para un 15% de descuento!',
       'desc.buchon': 'Ramos grandes y llamativos hechos para destacar.',
       'desc.vase': 'Arreglos en florero.',
       'desc.balloons': 'Globos para celebraciones, solos o con flores.',
       'desc.cards': 'Tarjetas para el pequeño detalle perfecto',
-      'desc.more': 'Corsages y boutonnieres para el baile de graduación, homecoming y bodas.',
+      'desc.wedding': 'Flores para tu día de boda.',
+      'desc.prom': 'Corsages y boutonnieres para el baile de graduación y homecoming.',
       'home.h2disclaimer': 'Aviso',
       'home.pdisclaimer': 'Este sitio de catálogo está en construcción. Es posible que no encuentre precios en todos nuestros artículos, pero aún puede contactarnos para más información sobre el artículo de su elección. ¡Gracias!',
       'home.h2time': 'Tiempo de Anticipación',
@@ -3101,8 +3161,6 @@
       'cards.babyshower': 'Baby Shower',
       'cards.congrats': 'Felicidades',
       'cards.graduation': 'Graduación',
-      'more.prom': 'Graduación (Baile)',
-      'more.wedding': 'Boda',
       'footer.text': 'Para ordenar, envíanos un mensaje —'
     };
 
